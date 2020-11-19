@@ -1,7 +1,15 @@
 
+const views = require('koa-views');
+const path = require('path');
+
 const Koa = require('koa');
 const app = new Koa();
 const router = require('./api/test')
+
+app.use(views(path.join(__dirname, './view'), {
+    extension: 'ejs'
+}))
+
 app.use(async (ctx, next) => {
     const start = Date.now();
     await next();
@@ -11,4 +19,5 @@ app.use(async (ctx, next) => {
 
 app.use(router.routes())
 app.listen(3000);
+
 

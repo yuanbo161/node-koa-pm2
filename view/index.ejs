@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>树莓派温度监测</title>
+    <script>
+
+        function inter() {
+
+            var xhr = new XMLHttpRequest()
+            // xhr.onreadystatechange = function() {
+            //     // 不是响应时触发，状态改变就触发
+            //     console.log(this.readyState)
+            // }
+
+            xhr.open('POST', '/api/users')
+
+            xhr.send()
+
+            xhr.onreadystatechange = function () {
+                if (this.readyState !== 4) return
+
+                console.log(this.responseText)
+                let dom=document.getElementById('ti')
+                dom.innerText=this.responseText
+            }
+
+            // var response = xhr.send()
+            // console.log(response)
+            
+        }
+
+        setInterval(inter,500)
+
+    </script>
+</head>
+
+<body>
+
+    <h1> 当前温度(摄氏度): </h1>
+    <h1 id="ti">
+        <%= title %>
+    </h1>
+
+</body>
+
+</html>
